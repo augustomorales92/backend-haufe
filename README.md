@@ -1,5 +1,47 @@
 **BASEURL** : `https://backend-haufe.up.railway.app/`
 
+# Create new User
+
+**URL** : `/users/register`
+
+**Method** : `POST`
+
+**Auth required** : NO
+
+**Data constraints**
+
+```json
+{
+  "username": "valid name ",
+  "password": "valid password",
+  "email": "some email"
+}
+```
+
+**Data example**
+
+```json
+{
+  "username": "augusto",
+  "password": "534123342",
+  "email": "some email"
+}
+```
+
+## Success Response
+
+**Code** : `200 OK`
+
+**Content example**
+
+```json
+{
+    "success": true,
+    "message": "everything is ok",
+    "code": "SUCCESS"
+}
+```
+
 # Authenticate
 
 **URL** : `/users/login`
@@ -12,8 +54,8 @@
 
 ```json
 {
-    "username": "valid name ",
-    "password": "valid password"
+  "username": "valid name ",
+  "password": "valid password"
 }
 ```
 
@@ -21,8 +63,8 @@
 
 ```json
 {
-    "username": "augusto",
-    "password": "534123342"
+  "username": "augusto",
+  "password": "534123342"
 }
 ```
 
@@ -34,9 +76,9 @@
 
 ```json
 {
-    "id": 1,
-    "username": "augusto",
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhdWd1c3RvIiwiaWF0IjoxNzA5MTI1MzU3LCJleHAiOjE3MDkxMjYyNTd9.pSjMhGVjjczi8bsGWIiMpv8X_UCmGaXfVM4770OP60Q"
+  "id": 1,
+  "username": "augusto",
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhdWd1c3RvIiwiaWF0IjoxNzA5MTI1MzU3LCJleHAiOjE3MDkxMjYyNTd9.pSjMhGVjjczi8bsGWIiMpv8X_UCmGaXfVM4770OP60Q"
 }
 ```
 
@@ -50,14 +92,13 @@
 
 ```json
 {
-    "success": false,
-    "message": "wrong data",
-    "code": "WRONG_DATA"
+  "success": false,
+  "message": "wrong data",
+  "code": "WRONG_DATA"
 }
 ```
 
 # Get characters
-
 
 **URL** : `/characters/all`
 
@@ -69,13 +110,11 @@
 
 **Auth required** : YES
 
-
 ## Success Response
 
 **Code** : `200 OK`
 
 **Content examples**
-
 
 ```json
   {
@@ -162,12 +201,9 @@
     ]},
 ```
 
-
 # Handle Favorites
 
-
 **URL** : `/favorites/add`
-
 
 **Method** : `POST`
 
@@ -177,24 +213,21 @@
 
 ```json
 {
-    "favoriteId": "valid id ",
+  "favoriteId": "valid id "
 }
 ```
-
 
 **Content example**
 
 ```json
 {
-    "favoriteId": 1
+  "favoriteId": 1
 }
 ```
 
 ## Success Response
 
 **Code** : `200 OK`
-
-
 
 **URL** : `/favorites/remove/:favoriteId`
 
@@ -204,11 +237,9 @@
 
 **Auth required** : YES
 
-
 ## Success Response
 
 **Code** : `200 OK`
-
 
 **URL** : `/policies/client/:policyNumber`
 
@@ -220,4 +251,4 @@
 
 **Permissions required** : `[admin]`
 
-TODO: should add rest of endpoints 
+TODO: should add rest of endpoints
