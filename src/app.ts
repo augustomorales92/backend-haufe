@@ -34,3 +34,5 @@ db.authenticate()
   })
 
 export default server
+
+module.exports = app
