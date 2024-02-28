@@ -1,14 +1,44 @@
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import User from '../models/Users'
-import { Users, Error, TokenResponse, TokenFromUser } from '../types'
+import { Users, Error, TokenResponse, CompleteUser } from '../types'
 import { errors } from '../constants'
 
-export const getUserById = async ({ id }): Promise<TokenFromUser> => {
+export const getUserById = async ({ id }): Promise<CompleteUser> => {
   try {
     const res = await User.findByPk(id)
     const user = res.toJSON()
     if (!user) throw new Error('wrong data')
+    return user
+  } catch (e) {
+    console.log(e)
+  }
+}
+
+export const getUsername = async ({ username }): Promise<CompleteUser> => {
+  try {
+    const res = await User.findOne({ where: { username: username } })
+    const user = res?.toJSON()
+    if (!user) throw new Error('wrong data')
+    return user
+  } catch (e) {
+    console.log(e)
+  }
+}
+
+export const checkIfUserAlreadyExist = async ({
+  username,
+  email
+}): Promise<CompleteUser | null> => {
+  try {
+    let user
+    const checkByUsername = await User.findOne({
+      where: { username: username }
+    })
+    user = checkByUsername?.toJSON()
+    const checkByEmail = await User.findOne({ where: { email: email } })
+    user = checkByEmail?.toJSON()
+    if (!user) return null
     return user
   } catch (e) {
     console.log(e)
@@ -20,12 +50,10 @@ export const registerUser = async ({
   password,
   email
 }: Users): Promise<void | Error> => {
-  try {
-    const hash = await bcrypt.hash(password, 13)
-    await User.create({ username, email, password: hash })
-  } catch (error) {
-    return errors['NO_CREATED']
-  }
+  const user = await checkIfUserAlreadyExist({ username, email })
+  if (user) throw errors['ALREADY_EXIST']
+  const hash = await bcrypt.hash(password, 13)
+  await User.create({ username, email, password: hash })
 }
 
 export const loginUser = async ({
@@ -33,8 +61,7 @@ export const loginUser = async ({
   password
 }): Promise<TokenResponse> => {
   try {
-    const res = await User.findOne({ where: { username: username } })
-    const user = res?.toJSON()
+    const user = await getUsername({ username })
     if (!user) throw errors['WRONG_DATA']
     const isValid = await bcrypt.compare(password, user.password)
     if (!isValid) throw errors['WRONG_DATA']

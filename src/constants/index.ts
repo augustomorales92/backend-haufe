@@ -40,6 +40,11 @@ export const errors: ErrorHandler = {
     success: false,
     message: 'Error trying to create new user',
     code: 'NO_CREATED'
+  },
+  ALREADY_EXIST: {
+    success: false,
+    message: 'Some data already exist in our data base',
+    code: 'ALREADY_EXIST'
   }
 }
 

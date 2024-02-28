@@ -45,7 +45,7 @@ export interface Users {
   email: string
 }
 
-export interface TokenFromUser extends Users {
+export interface CompleteUser extends Users {
   id: string
 }
 
@@ -55,7 +55,7 @@ export interface TokenResponse extends Partial<Users> {
 }
 
 export interface CustomRequest extends Request {
-  decoded: TokenFromUser
+  decoded: CompleteUser
 }
 
 export interface QueryProps {
