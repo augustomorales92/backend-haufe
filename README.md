@@ -56,7 +56,7 @@
 }
 ```
 
-# Get client by client id
+# Get characters
 
 
 **URL** : `/characters/all`
@@ -163,7 +163,7 @@
 ```
 
 
-# Get client by client name
+# Handle Favorites
 
 
 **URL** : `/favorites/add`
@@ -194,8 +194,6 @@
 
 **Code** : `200 OK`
 
-
-# Get policies associated to a client by client name
 
 
 **URL** : `/favorites/remove/:favoriteId`
