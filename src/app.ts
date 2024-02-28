@@ -6,7 +6,7 @@ import db from './index'
 import { unmatchedRoute } from './middlewares/errorhandler'
 
 const app = express()
-const port = 3001
+const port = process.env.PORT
 
 app.use(cors())
 app.use(helmet())
