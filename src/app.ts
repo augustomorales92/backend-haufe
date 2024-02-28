@@ -4,6 +4,7 @@ import helmet from 'helmet'
 import router from './routes'
 import db from './index'
 import { unmatchedRoute } from './middlewares/errorhandler'
+import serverless from 'serverless-http'
 
 const app = express()
 const port = 3001
@@ -11,14 +12,13 @@ const port = 3001
 app.use(cors())
 app.use(helmet())
 app.use(express.json())
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }))
 app.use('/', router)
 
 app.all('*', () => {
-    throw new Error();
-  });
+  throw new Error()
+})
 
-  
 app.use(unmatchedRoute)
 
 const server = app.listen(port, () => {
@@ -32,5 +32,7 @@ db.authenticate()
   .catch((err) => {
     console.error('Error during Data Source initialization', err)
   })
+
+export const handler = serverless(app)
 
 export default server
