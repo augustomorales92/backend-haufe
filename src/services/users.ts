@@ -34,7 +34,7 @@ export const loginUser = async ({
 }): Promise<TokenResponse> => {
   try {
     const res = await User.findOne({ where: { username: username } })
-    const user = res.toJSON()
+    const user = res?.toJSON()
     if (!user) throw errors['WRONG_DATA']
     const isValid = await bcrypt.compare(password, user.password)
     if (!isValid) throw errors['WRONG_DATA']
