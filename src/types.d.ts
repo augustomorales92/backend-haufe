@@ -31,9 +31,13 @@ export interface Characters {
 }
 
 export interface Error {
-  id: number
+  success: boolean
   message: string
+  code: string
 }
+
+export type ErrorHandler = { [key: string]: Error }
+
 
 export interface Users {
   username: string
@@ -41,7 +45,7 @@ export interface Users {
   email: string
 }
 
-export interface userToken extends Users {
+export interface TokenFromUser extends Users {
   id: string
 }
 
@@ -51,5 +55,10 @@ export interface TokenResponse extends Partial<Users> {
 }
 
 export interface CustomRequest extends Request {
-  decoded: userToken
+  decoded: TokenFromUser
+}
+
+export interface QueryProps {
+  name: string
+  page: string
 }

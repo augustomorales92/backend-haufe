@@ -12,8 +12,8 @@ export const getCharacters = async (
   ): Promise<void> => {
     try {
       const { id } = req.decoded
-      const page = String(req.query.page)
-      const name = String(req.query.name)
+      const page = String(req.query.page ?? '')
+      const name = String(req.query.name ?? '')
       const allCharacters = await characterServices.getCharacters({ id, name, page })
       res.status(HttpStatusCode.Ok).send(allCharacters)
     } catch (e) {

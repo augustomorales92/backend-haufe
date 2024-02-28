@@ -1,4 +1,6 @@
-export const errors = {
+import { ErrorHandler } from "../types"
+
+export const errors: ErrorHandler = {
   EXPIRED_TOKEN: {
     success: false,
     message: 'Token expired',
@@ -34,6 +36,11 @@ export const errors = {
     message: 'No routes matched',
     code: 'NO_ROUTED_MATCHED'
   },
+  NO_CREATED: {
+    success: false,
+    message: 'Error trying to create new user',
+    code: 'NO_CREATED'
+  }
 }
 
 export const success = {

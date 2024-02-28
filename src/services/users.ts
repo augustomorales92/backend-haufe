@@ -1,8 +1,19 @@
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import User from '../models/Users'
-import { Users, Error, userToken, TokenResponse } from '../types'
+import { Users, Error, TokenResponse, TokenFromUser } from '../types'
 import { errors } from '../constants'
+
+export const getUserById = async ({ id }): Promise<TokenFromUser> => {
+  try {
+    const res = await User.findByPk(id)
+    const user = res.toJSON()
+    if (!user) throw new Error('wrong data')
+    return user
+  } catch (e) {
+    console.log(e)
+  }
+}
 
 export const registerUser = async ({
   username,
@@ -13,19 +24,7 @@ export const registerUser = async ({
     const hash = await bcrypt.hash(password, 13)
     await User.create({ username, email, password: hash })
   } catch (error) {
-    console.error('Error trying to create new user:', error)
-    return { id: 2, message: 'Error trying to create new user' }
-  }
-}
-
-export const getUserById = async ({ id }): Promise<userToken> => {
-  try {
-    const res = await User.findByPk(id)
-    const user = res.toJSON()
-    if (!user) throw new Error('wrong data')
-    return user
-  } catch (e) {
-    console.log(e)
+    return errors['NO_CREATED']
   }
 }
 

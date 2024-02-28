@@ -1,8 +1,8 @@
+import { HttpStatusCode } from 'axios'
 import jwt from 'jsonwebtoken'
-import { getUserById } from '../services/users'
 import { CustomRequest } from '../types'
 import { errors } from '../constants'
-import { HttpStatusCode } from 'axios'
+import { getUserById } from '../services/users'
 
 const validateToken = async (req: CustomRequest, res, next) => {
   const auhorizationHeader = req.headers.authorization
