@@ -19,6 +19,7 @@
     "build": "tsc",
     "prestart": "npm run build",
     "start": "node dist/app.js",
+    "customStart": "node app/dist/app.js",
     "lint": "eslint . --ext .ts"
   },
   "keywords": [],
